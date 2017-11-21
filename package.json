@@ -10,7 +10,7 @@
     "test": "npm run lint && npm run integrationCoverage && (nyc report --reporter=text-lcov | coveralls)",
     "integrationCoverage": " NODE_ENV=test nyc node --expose-http2 ./test/runner.js",
     "integration": " NODE_ENV=test node --expose-http2 ./test/runner.js",
-    "dockerTest" : "docker build -t buslane . && docker run buslane sh -c \"npm run integration\"",
+    "dockerTest": "docker build -t buslane . && docker run buslane sh -c \"npm run integration\"",
     "spec": "NODE_ENV=test nyc node --expose-http2 ./test/runner.js",
     "lint": "eslint ."
   },
@@ -36,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/5app/buslane/issues"
   },
-  "homepage": "https://github.com/5app/buslane#readme"
+  "homepage": "https://github.com/5app/buslane#readme",
+  "dependencies": {
+    "http2": "^3.3.7"
+  }
 }
