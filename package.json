@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/5app/buslane/issues"
   },
-  "homepage": "https://github.com/5app/buslane#readme"
+  "homepage": "https://github.com/5app/buslane#readme",
+  "dependencies": {
+    "http2": "^3.3.7"
+  }
 }
