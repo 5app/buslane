@@ -18,13 +18,13 @@ describe('Simple::', () => {
 		argo.buslane.onReady(next);
 	});
 
-	it('can call a method, and we can see the result on the other side', async() => {
+	it('can call a method, and we can see the result on the other side', async () => {
 		await jason.boat.sail('sea');
 
 		expect(argo.destination).to.equal('sea');
 	});
 
-	it('perform under (light) stress', async() => {
+	it('perform under (light) stress', async () => {
 		const count = 100;
 		const ts = `time for ${count} calls`;
 
@@ -39,7 +39,7 @@ describe('Simple::', () => {
 		expect(argo.row_count).to.equal(count);
 	});
 
-	it('Can regenerate the connection after the client was destroyed', async() => {
+	it('Can regenerate the connection after the client was destroyed', async () => {
 		await jason.boat.sail('sea');
 
 		expect(argo.destination).to.equal('sea');
