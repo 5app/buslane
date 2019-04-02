@@ -10,8 +10,10 @@ const fs = require('fs');
 const path = require('path');
 
 const chai = require('chai');
-global.expect = chai.expect;
+const chaiAsPromised = require('chai-as-promised');
 
+chai.use(chaiAsPromised);
+global.expect = chai.expect;
 
 // process.env.BUS_DEBUG = 1;
 
