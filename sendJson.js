@@ -17,8 +17,6 @@ function sendRequest(options, data) {
 }
 
 async function sendJson({data, port, hostname = 'localhost', path = '/', apiKey = ''}) {
-	// console.log('sendJson', {hostname, port, path, data, apiKey});
-
 	const body = JSON.stringify(data);
 	const options = {
 		hostname,

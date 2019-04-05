@@ -12,7 +12,6 @@ function serialise(data) {
 }
 
 function respondWith({response, data, headers = {}, statusCode = 200}) {
-	// console.log('respondWith', {data, statusCode});
 	const serialisedData = serialise(data);
 	const dataHeaders = {};
 
