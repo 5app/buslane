@@ -2,9 +2,9 @@
 
 const debug = !!process.env.BUS_DEBUG;
 
-const sendJson = require('./sendJson');
-const RPCError = require('./RPCError');
-const createRpcServer = require('./createRpcServer');
+const sendJson = require('./lib/sendJson');
+const RPCError = require('./lib/RPCError');
+const createRpcServer = require('./lib/createRpcServer');
 
 module.exports = class Buslane {
 

@@ -1,7 +1,7 @@
 'use strict';
 
 const {Readable} = require('stream');
-const readJson = require('../../readJson');
+const readJson = require('../../lib/readJson');
 
 describe('readJson', () => {
 	it('should read a JSON from a stream', async () => {
