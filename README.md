@@ -5,7 +5,7 @@
 
 ## Intro
 
-buslane is a cross-service and transparent object.method proxy, using an rpc-lite json/http2 transport.
+Buslane is a cross-service and transparent object.method proxy, using an rpc-lite json/http1 transport.
 
 The need for this lib came about when we decided to move to docker at 5app. I wanted a simple way to remove our direct code dependencies between services without having to add extra endpoints manually.
 
@@ -15,9 +15,28 @@ This is all still very experimental, so use with caution, I sure am.
 
 ## Config & Usage
 
-__Warning__: This lib can only work if the ``--expose-http2`` is passed to the node process at start time.
+Install the buslane package using:
+```sh
+npm install --save @5app/buslane
+```
 
-I recommend looking at the [tests](https://github.com/5app/buslane/tree/master/test) to understand how the initialization work.
+Now, you will need to create a Buslane instance which you can use to make `service1` and `service2` communicate:	
+```javascript
+const Buslane = require('@5app/buslane');
+
+const thisServiceName = 'service1';
+const config = {
+	name: thisServiceName,
+	shared_api_key: 'my shared secret key',
+	map: [
+		{name: 'service2', port: 11211, ingresses: ['boat']},
+		{name: thisServiceName, port: 11311, ingresses: []},
+	],
+};
+
+const buslane = new Buslane(config);
+const rpcResult = await buslane.service2.boat.sail('ocean');
+```
 
 ## Test
 
@@ -28,23 +47,11 @@ docker build -t buslane . && docker run buslane
 ```
 
 
-## SSL
+## Comparison with Buslane 2
 
-By default buslane only provide a self signed cert that will only work with localhost. This default certificate is not for production use. 
+Buslane 3 uses HTTP1 while Buslane 2 uses HTTP2.
+The decision on dropping HTTP2 in favour of HTTP1 was made in order to resolve 2 issues:
 
-To generate the ssl certs for a particular host(the one your service will run on, make sure you replace $HOST and $NUMBER_OF_VALID_DAYS of course):
-
-    openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj -days $NUMBER_OF_VALID_DAYS'/CN=$HOST' -keyout ssl/key.pem -out ssl/certificate.pem
-
-Then make sure you provision the service with the absolute path to the key and the certificate:
-
-```
-const config = {name, shared_api_key: 'test'};
-	config.map = [
-		{name: 'argo', port: 11211, ingresses: ['boat'], ssl_key_path, ssl_cert_path},
-		{name: 'jason', port: 11311, ingresses: []},
-	];
-
-```
-
+- Recover connections after the service recovers: this can also be achieved by re-attempting connections and handling extra HTTP2 headers like `GOAWAY` (in addition to the current `ERR_HTTP2_INVALID_SESSION`).
+- Load balancing requests between multiple instances of the same service: HTTP2 creates a session which binds 2 services (instances) together using a TCP connection. As a session-less protocol, HTTP1 does not have this issue, but on the other hand, there will be a handshake every time a request is made (with extra overhead compared to HTTP2).
 
