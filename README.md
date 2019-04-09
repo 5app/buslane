@@ -5,7 +5,7 @@
 
 ## Intro
 
-buslane is a cross-service and transparent object.method proxy, using an rpc-lite json/http1 transport.
+Buslane is a cross-service and transparent object.method proxy, using an rpc-lite json/http1 transport.
 
 The need for this lib came about when we decided to move to docker at 5app. I wanted a simple way to remove our direct code dependencies between services without having to add extra endpoints manually.
 
@@ -15,9 +15,15 @@ This is all still very experimental, so use with caution, I sure am.
 
 ## Config & Usage
 
-I recommend looking at the [tests](https://github.com/5app/buslane/tree/master/test) to understand how the initialization work.
-
+Install the buslane package using:
+```sh
+npm install --save @5app/buslane
 ```
+
+Now, you will need to create a Buslane instance which you can use to make `service1` and `service2` communicate:	
+```javascript
+const Buslane = require('@5app/buslane');
+
 const thisServiceName = 'service1';
 const config = {
 	name: thisServiceName,

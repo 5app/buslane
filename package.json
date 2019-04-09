@@ -1,5 +1,5 @@
 {
-  "name": "buslane",
+  "name": "@5app/buslane",
   "version": "2.2.0",
   "description": "buslane is a cross-service and transparent object.method proxy, using an rpc-lite json/http1 transport.",
   "main": "index.js",
@@ -20,16 +20,16 @@
     "object",
     "proxy"
   ],
-  "author": "Rémi Bouchar",
+  "author": "5app",
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.0.2",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.2",
-    "eslint": "^5.5.0",
+    "eslint": "^5.16.0",
     "eslint-config-5app": "^0.3.0",
-    "mocha": "^6.0.0",
-    "nyc": "^13.0.1"
+    "mocha": "^6.1.2",
+    "nyc": "^13.3.0"
   },
   "repository": {
     "type": "git",
