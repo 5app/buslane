@@ -59,10 +59,10 @@ describe('Buslane', () => {
 		await expect(jason.boat.sail('ocean')).to.be.rejectedWith('connect ECONNREFUSED 127.0.0.1:11211');
 
 		// 3. restart the service
-		argo = new services.Argo();
+		const argo2 = new services.Argo();
 
 		// 4. make sure we can call the remote service again
 		await jason.boat.sail('ocean');
-		expect(argo.destination).to.equal('ocean');
+		expect(argo2.destination).to.equal('ocean');
 	});
 });
