@@ -7,12 +7,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm run lint && npm run integrationCoverage && (nyc report --reporter=text-lcov | coveralls)",
+    "test": "npm run integrationCoverage && (nyc report --reporter=text-lcov | coveralls)",
     "integrationCoverage": " NODE_ENV=test nyc node ./test/runner.js",
     "integration": " NODE_ENV=test node ./test/runner.js",
     "dockerTest": "docker build -t buslane . && docker run buslane sh -c \"npm run integration\"",
+    "semantic-release": "semantic-release",
     "spec": "NODE_ENV=test nyc node ./test/runner.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint-diff": "LIST=`git diff-index --name-only HEAD | grep '.*\\.js$';`; if [ \"$LIST\" ]; then eslint $LIST; fi",
+    "precommit-msg": "echo 'Running pre-commit checks... (skip using --no-verify)' && exit 0"
   },
   "keywords": [
     "rpc",
@@ -23,13 +26,42 @@
   "author": "5app",
   "license": "MIT",
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.4",
+    "@semantic-release/git": "^7.0.16",
     "chai": "^4.0.2",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.2",
     "eslint": "^6.0.0",
     "eslint-config-5app": "^0.6.2",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "pre-commit": "^1.2.2",
+    "semantic-release": "^15.13.24"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "lint-diff"
+  ],
+  "release": {
+    "branch": "master",
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   },
   "repository": {
     "type": "git",

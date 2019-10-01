@@ -1,8 +1,6 @@
-FROM node:8.8.1-alpine
+FROM node:12.9.1-alpine
 
 COPY package.json /tmp/package.json
-COPY package-lock.json /tmp/package-lock.json
-
 RUN cd /tmp/ && NODE_ENV=dev npm i
 
 # Create app directory
