@@ -1,4 +1,4 @@
-FROM node:12.9.1-alpine
+FROM node:12-alpine
 
 COPY package.json /tmp/package.json
 RUN cd /tmp/ && NODE_ENV=dev npm i
