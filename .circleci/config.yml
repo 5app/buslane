@@ -1,20 +1,61 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12
+
 version: 2
 jobs:
-  build:
-    docker:
-      - image: 5app/node-circleci:2.0.0
-    working_directory: ~/buslane
-    steps: 
+  checkout_code:
+    <<: *defaults
+    steps:
       - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
       - restore_cache:
-          key: v2-dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Install npm dependencies
+          name: install dependencies with npm
           command: npm install
       - save_cache:
-          key: v2-dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
-            - "node_modules"
+            - ./node_modules
       - run:
-          name: test
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Test
           command: npm test
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules
+
+  release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - checkout
+      - run: npm run semantic-release
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - checkout_code
+      - test:
+          requires:
+            - checkout_code
+      - release:
+          context: org-global
+          requires:
+            - test
