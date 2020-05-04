@@ -1,4 +1,3 @@
-'use strict';
 
 
 const services = require('../mock/services.js');

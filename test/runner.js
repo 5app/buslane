@@ -1,4 +1,4 @@
-'use strict';
+
 
 /*
  * Run the dashboardV2 api as a subprocess and run the test integration programatically
@@ -36,7 +36,7 @@ function runTest() {
 	fs.readdirSync(testDir).filter(file =>
 		// Only keep the .js files
 		file.substr(-3) === '.js').forEach(file => {
-		console.log(`queuing test file ${ file}`);
+		console.log(`queuing test file ${file}`);
 		mocha.addFile(
 			path.join(testDir, file)
 		);

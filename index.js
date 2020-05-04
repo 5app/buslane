@@ -1,4 +1,4 @@
-'use strict';
+
 
 const debug = !!process.env.BUS_DEBUG;
 
@@ -32,9 +32,9 @@ module.exports = class Buslane {
 		config.map.forEach(service => {
 			if (service.name !== config.name) {
 				this[service.name] = {};
-				service.ingresses.forEach(egress =>
-					this[service.name][egress] = this.registerEgress(service.name, egress)
-				);
+				service.ingresses.forEach(egress => {
+					this[service.name][egress] = this.registerEgress(service.name, egress);
+				});
 			}
 		});
 
