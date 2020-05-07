@@ -1,6 +1,6 @@
 {
   "name": "@5app/buslane",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "buslane is a cross-service and transparent object.method proxy, using an rpc-lite json/http1 transport.",
   "main": "index.js",
   "directories": {
