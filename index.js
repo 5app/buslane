@@ -1,7 +1,8 @@
-'use strict';
+
 
 const debug = !!process.env.BUS_DEBUG;
 
+const logger = require('@5app/logger');
 const sendJson = require('./lib/sendJson');
 const RPCError = require('./lib/RPCError');
 const createRpcServer = require('./lib/createRpcServer');
@@ -31,9 +32,9 @@ module.exports = class Buslane {
 		config.map.forEach(service => {
 			if (service.name !== config.name) {
 				this[service.name] = {};
-				service.ingresses.forEach(egress =>
-					this[service.name][egress] = this.registerEgress(service.name, egress)
-				);
+				service.ingresses.forEach(egress => {
+					this[service.name][egress] = this.registerEgress(service.name, egress);
+				});
 			}
 		});
 
@@ -85,10 +86,6 @@ module.exports = class Buslane {
 		 Return a proxy object that will assume all methods exists. If we take a config with to services with
 		 on ingress each, those will be register as egress on the otherside. The proxy object is required
 		 to be able to call any function. If the function does not exist on the other side an error is thrown.
-
-		 Params:
-			- stream(stream, required) an http2 stream
-			- headers(Object) the http2 request headers
 	 */
 	registerEgress(serviceName, name) {
 		const destination = this.config.map.find(x => x.name === serviceName);
@@ -106,8 +103,9 @@ module.exports = class Buslane {
 					}
 
 					const data = {name, methodName, args};
+
 					if (debug) {
-						console.log(`Bus query on ${serviceName}:${name} at ${new Date()}: `, data);
+						logger.info(`[Buslane] Query on ${serviceName}:${name}`, data);
 					}
 
 					const {status, body} = await sendJson({
@@ -115,11 +113,12 @@ module.exports = class Buslane {
 						hostname: destination.host,
 						port: destination.port,
 						apiKey: shared_api_key,
+						targetService: destination.name,
 					});
 
 					if (status !== 200) {
 						if (debug) {
-							console.error(`Bus error on ${serviceName}:${name}: `, body);
+							logger.error(`[Buslane] Bus error on ${serviceName}:${name}: `, body);
 						}
 
 						throw new RPCError({
@@ -153,7 +152,7 @@ module.exports = class Buslane {
 		const service = this.config.map.find(x => x.name === this.config.name);
 
 		if (!service) {
-			throw new Error(`No know ingresses for ${name}`);
+			throw new Error(`No known ingresses for ${name}`);
 		}
 
 		this.createServer(service);
