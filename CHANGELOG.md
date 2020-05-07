@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/5app/buslane/compare/v3.1.0...v3.2.0) (2020-05-07)
+
+
+### Features
+
+* Simplify error messages ([#51](https://github.com/5app/buslane/issues/51)) ([e50c346](https://github.com/5app/buslane/commit/e50c34696322d8d3ea7566070d66bea876245b72)), closes [#49](https://github.com/5app/buslane/issues/49)
+
 # [3.1.0](https://github.com/5app/buslane/compare/v3.0.1...v3.1.0) (2020-05-07)
 
 
