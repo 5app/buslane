@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/5app/buslane/compare/v3.2.0...v3.3.0) (2021-03-17)
+
+
+### Features
+
+* expose handleRPC function to directly handle requests ([37ba523](https://github.com/5app/buslane/commit/37ba523ae1726fc60c4b4581f84ced6be38caa0d))
+
 # [3.2.0](https://github.com/5app/buslane/compare/v3.1.0...v3.2.0) (2020-05-07)
 
 
