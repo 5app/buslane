@@ -1,0 +1,4 @@
+{
+    "require": "./test/runner.js",
+    "ui": "bdd"
+}

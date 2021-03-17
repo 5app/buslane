@@ -87,5 +87,6 @@ describe('Buslane', () => {
 		// 4. make sure we can call the remote service again
 		await jason.boat.sail('ocean');
 		expect(argo2.destination).to.equal('ocean');
+		argo2.destroy();
 	});
 });

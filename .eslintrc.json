@@ -1,7 +1,10 @@
 {
 	"root": true,
-	"extends": "5app",
+	"extends": [
+		"plugin:node/recommended",
+		"5app"
+	],
 	"rules": {
-		"no-console": 0		
+		"no-console": 0
 	}
 }

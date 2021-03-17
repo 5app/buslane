@@ -1,12 +1,14 @@
-defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: circleci/node:12
+version: 2.1
 
-version: 2
+executors:
+  node:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:12
+
 jobs:
   checkout_code:
-    <<: *defaults
+    executor: node
     steps:
       - checkout
       - persist_to_workspace:
@@ -15,7 +17,7 @@ jobs:
             - .
 
   test:
-    <<: *defaults
+    executor: node
     steps:
       - attach_workspace:
           at: ~/repo
@@ -40,7 +42,7 @@ jobs:
             - node_modules
 
   release:
-    <<: *defaults
+    executor: node
     steps:
       - attach_workspace:
           at: ~/repo
@@ -48,7 +50,6 @@ jobs:
       - run: npm run semantic-release
 
 workflows:
-  version: 2
   build:
     jobs:
       - checkout_code
