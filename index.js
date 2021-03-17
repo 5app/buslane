@@ -5,7 +5,7 @@ const debug = !!process.env.BUS_DEBUG;
 const logger = require('@5app/logger');
 const sendJson = require('./lib/sendJson');
 const RPCError = require('./lib/RPCError');
-const createRpcServer = require('./lib/createRpcServer');
+const {createRpcServer, handleRPC} = require('./lib/createRpcServer');
 
 module.exports = class Buslane {
 
@@ -157,6 +157,18 @@ module.exports = class Buslane {
 
 		this.createServer(service);
 		this.services[name] = obj;
+	}
+
+	/**
+	 * Handle RPC Connections
+	 * @param {Request} req - Http Request object
+	 * @param {Response} res - Http Response object
+	 * @returns {void}
+	 */
+	handleRPC(req, res) {
+
+		// Handle RPC Requests...
+		return handleRPC(this.config.shared_api_key, this.services, req, res);
 	}
 
 };

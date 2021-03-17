@@ -1,6 +1,6 @@
 
-
 const services = require('../mock/services.js');
+const http = require('http');
 
 let argo;
 let jason;
@@ -22,6 +22,30 @@ describe('Buslane', () => {
 		await jason.boat.sail('sea');
 
 		expect(argo.destination).to.equal('sea');
+	});
+
+	it('can bind to an existing listener', async () => {
+
+		const port = 12345;
+		let serverHit;
+
+		// Create a server which listens on another port...
+		const srv = http.createServer((req, res) => {
+			serverHit = true;
+			argo.buslane.handleRPC(req, res);
+		}).listen(port);
+
+		// Change the buslane config in jason to use this new port for the handling...
+		jason.buslane.config.map.find(item => item.name === 'argo').port = port;
+
+		// Test it works
+		await jason.boat.sail('river');
+		expect(argo.destination).to.equal('river');
+
+		// ... and that it used the new service
+		expect(serverHit).to.be.ok;
+
+		srv.close();
 	});
 
 	it('perform under (light) stress', async () => {
