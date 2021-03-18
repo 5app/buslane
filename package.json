@@ -6,13 +6,17 @@
   "directories": {
     "test": "test"
   },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "index.js",
+    "lib/"
+  ],
   "scripts": {
-    "test": "npm run integrationCoverage && (nyc report --reporter=text-lcov | coveralls)",
-    "integrationCoverage": " NODE_ENV=test nyc node ./test/runner.js",
-    "integration": " NODE_ENV=test node ./test/runner.js",
-    "dockerTest": "docker build -t buslane . && docker run buslane sh -c \"npm run integration\"",
+    "test": "npm run spec && (nyc report --reporter=text-lcov | coveralls)",
     "semantic-release": "semantic-release",
-    "spec": "NODE_ENV=test nyc node ./test/runner.js",
+    "spec": "nyc mocha ./test/tests/*.js",
     "lint": "eslint .",
     "lint-diff": "LIST=`git diff-index --name-only HEAD | grep '.*\\.js$';`; if [ \"$LIST\" ]; then eslint $LIST; fi",
     "precommit-msg": "echo 'Running pre-commit checks... (skip using --no-verify)' && exit 0"
@@ -28,11 +32,12 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.1.0",
-    "eslint": "^7.0.0",
-    "eslint-config-5app": "^0.10.0",
+    "eslint": "^7.22.0",
+    "eslint-config-5app": "^0.14.2",
+    "eslint-plugin-node": "^11.1.0",
     "mocha": "^8.0.0",
     "nyc": "^15.0.1",
     "pre-commit": "^1.2.2",
