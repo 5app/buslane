@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/5app/buslane/compare/v3.3.0...v3.4.0) (2021-11-18)
+
+
+### Features
+
+* Extend RPCError stack trace with the original one ([#66](https://github.com/5app/buslane/issues/66)) ([fa4df89](https://github.com/5app/buslane/commit/fa4df89d2559b6b3b546467e8f73f46b88a94f36))
+
 # [3.3.0](https://github.com/5app/buslane/compare/v3.2.0...v3.3.0) (2021-03-17)
 
 
