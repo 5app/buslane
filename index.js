@@ -118,7 +118,7 @@ module.exports = class Buslane {
 
 					if (status !== 200) {
 						if (debug) {
-							logger.error(`[Buslane] Bus error on ${serviceName}:${name}: `, body);
+							logger.error(`[Buslane] Bus error(s) on ${serviceName}:${name}:`, {body, currentStack: (new Error()).stack});
 						}
 
 						throw new RPCError({
