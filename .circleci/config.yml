@@ -57,6 +57,6 @@ workflows:
           requires:
             - checkout_code
       - release:
-          context: org-global
+          context: github-release
           requires:
             - test
