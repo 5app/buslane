@@ -5,6 +5,7 @@
 		"5app"
 	],
 	"rules": {
-		"no-console": 0
+		"no-console": 0,
+		"max-params": [0, {"max": 4}]
 	}
 }

@@ -15,7 +15,6 @@
   ],
   "scripts": {
     "test": "npm run spec && (nyc report --reporter=text-lcov | coveralls)",
-    "semantic-release": "semantic-release",
     "spec": "nyc mocha ./test/tests/*.js",
     "lint": "eslint .",
     "lint-diff": "LIST=`git diff-index --name-only HEAD | grep '.*\\.js$';`; if [ \"$LIST\" ]; then eslint $LIST; fi",
@@ -30,43 +29,26 @@
   "author": "5app",
   "license": "MIT",
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.0",
-    "@semantic-release/git": "^10.0.0",
-    "chai": "^4.3.4",
+    "@5app/semantic-release-config": "^1.0.3",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.1.0",
-    "eslint": "^7.22.0",
-    "eslint-config-5app": "^0.15.0",
+    "coveralls": "^3.1.1",
+    "eslint": "^8.23.0",
+    "eslint-config-5app": "^0.16.4",
     "eslint-plugin-node": "^11.1.0",
     "mocha": "^10.0.0",
-    "nyc": "^15.0.1",
+    "nyc": "^15.1.0",
     "pre-commit": "^1.2.2",
-    "semantic-release": "^19.0.0"
+    "semantic-release": "^19.0.5"
   },
   "pre-commit": [
     "precommit-msg",
     "lint-diff"
   ],
   "release": {
-    "branch": "master",
-    "prepare": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json",
-          "CHANGELOG.md"
-        ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-      }
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
-      "@semantic-release/github"
-    ]
+    "extends": "@5app/semantic-release-config"
   },
   "repository": {
     "type": "git",
@@ -77,6 +59,6 @@
   },
   "homepage": "https://github.com/5app/buslane#readme",
   "dependencies": {
-    "@5app/logger": "^2.0.2"
+    "@5app/logger": "^2.3.0"
   }
 }
