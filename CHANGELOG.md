@@ -1,3 +1,10 @@
+## [3.4.1](https://github.com/5app/buslane/compare/v3.4.0...v3.4.1) (2022-09-07)
+
+
+### Bug Fixes
+
+* use github registry, update dependencies ([3c860e1](https://github.com/5app/buslane/commit/3c860e1ccc8f81b7eba4519990a4e00bd2d4eca6))
+
 # [3.4.0](https://github.com/5app/buslane/compare/v3.3.0...v3.4.0) (2021-11-18)
 
 
