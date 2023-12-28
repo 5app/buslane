@@ -32,7 +32,7 @@
     "@5app/semantic-release-config": "^1.0.3",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "chai": "^4.3.6",
+    "chai": "^5.0.0",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.1.1",
     "eslint": "^8.23.0",
