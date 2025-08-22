@@ -29,7 +29,7 @@
   "author": "5app",
   "license": "MIT",
   "devDependencies": {
-    "@5app/semantic-release-config": "^1.0.3",
+    "@5app/semantic-release-config": "^2.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "chai": "^4.3.6",
