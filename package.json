@@ -30,8 +30,8 @@
   "license": "MIT",
   "devDependencies": {
     "@5app/semantic-release-config": "^1.0.3",
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/git": "^11.0.0",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.1.1",
@@ -41,7 +41,7 @@
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
     "pre-commit": "^1.2.2",
-    "semantic-release": "^21.0.0"
+    "semantic-release": "^25.0.0"
   },
   "pre-commit": [
     "precommit-msg",
